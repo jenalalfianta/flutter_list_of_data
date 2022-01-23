@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'quotes.dart';
 
 void main() => runApp(MaterialApp(
       home: quoteList(),
@@ -12,11 +13,11 @@ class quoteList extends StatefulWidget {
 }
 
 class _quoteListState extends State<quoteList> {
-  List<String> quotes = [
-    'Allah hadir di antara seseorang dan hatinya - Quran 8:24',
-    'Karena sesungguhnya bersama kesulitan ada kemudahan - Quran 94:5',
-    'Allah tidak membebani suatu jiwa melebihi apa yang dapat ditanggungnya - Quran 2:286',
-    'Maka janganlah putus asa, jangan pula putus asa, karena kamu lebih unggul jika kamu beriman - QS. Al-Imran 3:139'
+  List<Quotes> quotes = [
+    Quotes(author: 'JENAL', text: 'percobaan 1'),
+    Quotes(author: 'JENAL', text: 'percobaan 2'),
+    Quotes(author: 'JENAL', text: 'percobaan 3'),
+    Quotes(author: 'JENAL', text: 'percobaan 4'),
   ];
 
   @override
@@ -30,7 +31,9 @@ class _quoteListState extends State<quoteList> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: quotes.map((quote) => Text(quote)).toList(),
+        children: quotes
+            .map((quote) => Text('${quote.text} - ${quote.author}'))
+            .toList(),
       ),
     );
   }
