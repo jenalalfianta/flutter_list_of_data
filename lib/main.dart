@@ -1,66 +1,46 @@
 import 'package:flutter/material.dart';
-import 'quotes.dart';
+import 'quote.dart';
+import 'quote_card.dart';
 
-void main() => runApp(MaterialApp(
-      home: quoteList(),
-    ));
+void main() => runApp(MaterialApp(home: QuoteList()));
 
-class quoteList extends StatefulWidget {
-  const quoteList({Key? key}) : super(key: key);
-
+class QuoteList extends StatefulWidget {
   @override
-  _quoteListState createState() => _quoteListState();
+  _QuoteListState createState() => _QuoteListState();
 }
 
-class _quoteListState extends State<quoteList> {
-  List<Quotes> quotes = [
-    Quotes(author: 'JENAL', text: 'percobaan 1'),
-    Quotes(author: 'JENAL', text: 'percobaan 2'),
-    Quotes(author: 'JENAL', text: 'percobaan 3'),
-    Quotes(author: 'JENAL', text: 'percobaan 4'),
+class _QuoteListState extends State<QuoteList> {
+  List<Quote> quotes = [
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'Be yourself; everyone else is already taken'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Oscar Wilde',
+        text: 'The truth is rarely pure and never simple')
   ];
-
-  Widget quotetemplate(quote) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              quote.text,
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.grey.shade600,
-              ),
-            ),
-            SizedBox(height: 6.0),
-            Text(
-              quote.author,
-              style: TextStyle(
-                fontSize: 14.0,
-                color: Colors.grey.shade800,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text('Awesome Quotes'),
         centerTitle: true,
-        backgroundColor: Colors.purple.shade900,
+        backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: quotes.map((quote) => quotetemplate(quote)).toList(),
+        children: quotes
+            .map((quote) => QuoteCard(
+                quote: quote,
+                delete: () {
+                  setState(() {
+                    quotes.remove(quote);
+                  });
+                }))
+            .toList(),
       ),
     );
   }
